@@ -1,5 +1,5 @@
-#coding=utf8
-#***************************************************************************************
+# coding=utf8
+# ***************************************************************************************
 # This project is licensed under Mulan PSL v2.
 # You can use this software according to the terms and conditions of the Mulan PSL v2.
 # You may obtain a copy of Mulan PSL v2 at:
@@ -10,7 +10,7 @@
 # MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 #
 # See the Mulan PSL v2 for more details.
-#**************************************************************************************/
+# **************************************************************************************/
 
 import toffee
 import os
@@ -69,16 +69,16 @@ def tlb_fixture(request):
     coverage_dir = os.path.dirname(coverage_file)
     os.makedirs(coverage_dir, exist_ok=True)
     random.seed(datetime.now().timestamp() * 10000)
-    v = 1919810 + random.randint(24, 114514)
+    v = 1919810 + random.randint(24, 114514)  # ?
     dut = DUTTLB(
         [f"+verilator+seed+{v}", ],
         waveform_filename=wave_file,
         coverage_filename=coverage_file)
     tlb = TLBWrapper(dut)
     init_itlb_funcov(tlb, g)
-    
+
     yield tlb
-    
+
     tlb.dut.Finish()
     set_line_coverage(request, coverage_file)
     set_func_coverage(request, g)
